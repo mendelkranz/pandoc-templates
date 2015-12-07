@@ -1,0 +1,3 @@
+[submodule "pandoc-templates-1"]
+	path = pandoc-templates-1
+	url = https://github.com/mendelkranz/pandoc-templates-1.git
