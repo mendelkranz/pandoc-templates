@@ -1,10 +1,11 @@
 %\newpage
 %\chapter{References}
-\medskip
+\bigskip
+\bigskip
 \setlength{\parindent}{-0.2in}
 %\singlespacing
 \small
 \setlength{\leftskip}{0.2in}
-\setlength{\parskip}{8pt}
+\setlength{\parskip}{1pt}
 \vspace*{-0.4in}
 \noindent
