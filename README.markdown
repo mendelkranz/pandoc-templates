@@ -41,3 +41,4 @@ What's included?
   paper. It looks for `.md` files in the working directory and
   converts them to nice HTML, PDF, and DOCX. You can of course
   change the bibliography and template files as desired.
+- The `pandoc` commands produced by the current version of the `Makefile` include switches that invoke a [pandoc filters](http://pandoc.org/scripting.html) that does additional processing on the bibliography and cross-references in the document. You should install [pandoc-citeproc-preamble](https://github.com/spwhitton/pandoc-citeproc-preamble) to make it work.
