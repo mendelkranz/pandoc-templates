@@ -3,6 +3,8 @@
 ## rest of the toolchain here, you can use it to create .docx, .tex,
 ## and .pdf output files (complete with bibliography, if present) from
 ## your markdown file.
+## -    Install the `pandoc-citeproc` and `pandoc-citeproc-preamble`
+##      filters for `pandoc`. See the README for links.
 ## -	Change the paths at the top of the file as needed.
 ## -	Using `make` without arguments will generate docx, tex, and pdf
 ## 	output files from all of the files with the designated markdown
