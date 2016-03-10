@@ -18,14 +18,16 @@ What's included?
   [Marked](http://markedapp.com/). You point Marked to use pandoc in Marked >
   Preferences > Advanced. Then specify the file Path to Pandoc. With the new mactex version for 2015 my file path looks like this `/usr/local/bin/pandoc`You can add the various switches and arguments to pandoc
   in the 'Args' field below it, mine look like this:
-    
+
     ```
-    -r markdown -w html -s -S --filter pandoc-citeproc 
-    --bibliography=/Users/Mendel/github/papers/main.bib 
+    -r markdown -w html -s -S --filter pandoc-citeproc
+    --bibliography=/Users/Mendel/github/papers/main.bib
     --csl=/Users/Mendel/.pandoc/csl/chicago-fullnote-bibliography.csl
     ```
-    
-    Then check the box telling Marked to use this by default.
+
+    Then check the box telling Marked to use this by default. Note
+    that you may have to specify the path to any pandoc filters you
+    use.
 - The CSS files can be added in Marked > Style > Custom CSS. Marked
   can then use them to format the HTML output.
 - The CSL files in the `csl/` folder format the bibliography generated
