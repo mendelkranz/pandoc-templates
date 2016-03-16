@@ -44,7 +44,7 @@ docx:	clean $(DOCX)
 hmtl: clean $(HTML)
 
 %.html:	%.md
-	pandoc  -w html -S --template=$(PREFIX)/templates/html.template --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
+	pandoc  -w html -S --template=$(PREFIX)/templates/default.html --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
 
 %.docx:	%.md
