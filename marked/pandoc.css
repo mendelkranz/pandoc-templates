@@ -9,31 +9,31 @@
 
 /*** Font Definitions ***/
 @font-face {
-    font-family: "Hoefler Text";
+    font-family: "Baskerville";
 }
 @font-face {
-    font-family: "Consolas";
+    font-family: "Baskerville";
 }
 
 /*** Style Definitions ***/
 html {
     font-size: 100%;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     margin-left: auto;
     margin-right: auto;
 }
 body, div, p {
     -webkit-font-smoothing: antialiased;
     color: #111;
-    font-family: "Times New Roman";
+    font-family: 'Garamond';
     hyphens: auto;
     margin: 0in;
     text-align: justify;
     text-indent: .25in;
-    line-height: 200%;
+    line-height: 150%;
     pagination: widow-orphan;
-    font-size: 12pt;
+    font-size: 11pt;
     font-weight: normal;
 }
 /* Headers */
@@ -116,7 +116,7 @@ h6 {
     text-indent: 0;
     line-height: 100%;
     font-size: 10pt;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 /* Blockquotes */
 blockquote p {
@@ -179,7 +179,7 @@ a:hover {
 .footnote, .footnoteRef {
     color: #0d6ea1;
     font-size: 12pt;
-    vertical-align: super;
+    vertical-align: text-top;
 }
 
 #wrapper img {
