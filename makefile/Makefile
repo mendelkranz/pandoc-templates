@@ -44,16 +44,16 @@ docx:	clean $(DOCX)
 hmtl: clean $(HTML)
 
 %.html:	%.md
-	pandoc  -w html -S --template=$(PREFIX)/templates/default.html --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
+	pandoc  -w html --template=$(PREFIX)/templates/default.html --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
 
 %.docx:	%.md
-	pandoc -w docx -S -s --reference-docx=$(PREFIX)/templates/reference.docx  --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
+	pandoc -w docx --reference-doc=$(PREFIX)/templates/reference.docx  --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
 
 
 %.pdf:	%.md
-	pandoc -s -S --latex-engine=xelatex --template=$(PREFIX)/templates/article.tex --filter pandoc-citeproc --filter pandoc-citeproc-preamble --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
+	pandoc --pdf-engine=xelatex --template=$(PREFIX)/templates/article.tex --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
 clean:
 	rm -f *.docx *.pdf
