@@ -8,10 +8,10 @@
 ## -	Change the paths at the top of the file as needed.
 ## -	Using `make` without arguments will generate docx, tex, and pdf
 ## 	output files from all of the files with the designated markdown
-##	extension. The default is `.md` but you can change this.
-## -	You can specify an output format with `make tex`, `make pdf` or
-## - 	`make docx`.
-## -	Doing `make clean` will remove all the .tex, .docx, and .pdf files
+##	extension. The default is `.md` but you can change this. 
+## -	You can specify an output format with `make tex`, `make pdf`,  
+## - 	`make html`, or `make docx`.
+## -	Doing `make clean` will remove all the .tex, .html, .pdf, and .docx files 
 ## 	in your working directory. Make sure you do not have files in these
 ##	formats that you want to keep!
 
@@ -34,14 +34,16 @@ CSL = chicago-fullnote-bibliography
 PDFS=$(SRC:.md=.pdf)
 DOCX=$(SRC:.md=.docx)
 HTML=$(SRC:.md=.html)
+TEX=$(SRC:.md=.tex)
+DOCX=$(SRC:.md=.docx)
 
 
-
-all:	$(PDFS) $(DOCX) $(HTML)
+all:	$(PDFS) $(HTML) $(TEX) $(DOCX)
 
 pdf:	clean $(PDFS)
+html:	clean $(HTML)
+tex:	clean $(TEX)
 docx:	clean $(DOCX)
-hmtl: clean $(HTML)
 
 %.html:	%.md
 	pandoc  -w html --template=$(PREFIX)/templates/default.html --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
@@ -55,5 +57,9 @@ hmtl: clean $(HTML)
 %.pdf:	%.md
 	pandoc --pdf-engine=xelatex --template=$(PREFIX)/templates/article.tex --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
+
+%.docx: %.md
+	pandoc -r markdown+simple_tables+table_captions+yaml_metadata_block -w docx -S  --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
+
 clean:
-	rm -f *.docx *.pdf
+	rm -f *.html *.pdf *.tex *.docx

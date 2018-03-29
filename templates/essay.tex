@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simple Sectioned Essay Template
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing essay content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article} % Default font size is 12pt, it can be changed here
+
+\usepackage{geometry} % Required to change the page size to A4
+\geometry{a4paper} % Set the page size to be A4 as opposed to the default US Letter
+
+\usepackage{graphicx} % Required for including pictures
+
+\usepackage{float} % Allows putting an [H] in \begin{figure} to specify the exact location of the figure
+\usepackage{wrapfig} % Allows in-line images such as the example fish picture
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Line spacing
+\usepackage{setspace}
+\doublespacing
+
+%footnote color
+\renewcommand\thefootnote{\textcolor{black}{\arabic{footnote}}}
+
+
+  
+\usepackage{sectsty}
+\allsectionsfont{\raggedright}
+
+\usepackage[raggedright]{titlesec}
+
+%delete section numbering
+%\renewcommand{\thesection}{}
+\setcounter{secnumdepth}{0}
+
+%for defining titles
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\large\scshape}{\thesection}{1em}{}
+	\titleformat{\subsection}
+		{\normalsize\itshape} {\thesubsection}{\normalsize}{}
+
+%flush footnotes left
+\usepackage[hang,flushmargin]{footmisc} 
+
+
+%\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+\graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+
+%% Name, Title, Affiliation, Contact. Change as needed.
+\def\myaffiliation{University of Chicago}
+\def\myauthor{Mendel Kranz}
+\def\myemail{\small{\texttt{\href{mailto:mkranz@uchicago.edu}{mkranz@uchicago.edu}}}}
+
+%% Hyperlinks
+\usepackage[usenames,dvipsnames]{color}                     
+\usepackage[xetex, 
+	colorlinks=true,
+	urlcolor=BlueViolet, % external links
+        citecolor=BlueViolet, % citations
+        filecolor=BlueViolet, % local files
+	plainpages=false,
+  	pdfpagelabels,
+  	bookmarksnumbered,
+  	pdftitle={$title-meta$},
+  	pdfauthor={$author-meta$},
+  	%%pdfkeywords={\mykeywords}
+  	]{hyperref}   
+	
+	
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+%\begin{titlepage}
+
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+%\center % Center everything on the page
+
+%\textsc{\LARGE University Name}\\[1.5cm] % Name of your university/college
+%\textsc{\Large Major Heading}\\[0.5cm] % Major heading such as course name
+%\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+
+%\HRule \\[0.4cm]
+%{ \huge \bfseries Title}\\[0.4cm] % Title of your document
+%\HRule \\[1.5cm]
+
+%\begin{minipage}{0.4\textwidth}
+%\begin{flushleft} \large
+%\emph{Author:}\\
+%John \textsc{Smith} % Your name
+%\end{flushleft}
+%\end{minipage}
+%~
+%\begin{minipage}{0.4\textwidth}
+%\begin{flushright} \large
+%\emph{Supervisor:} \\
+%Dr. James \textsc{Smith} % Supervisor's Name
+%\end{flushright}
+%\end{minipage}\\[4cm]
+
+%{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+%\vfill % Fill the rest of the page with whitespace
+
+ 
+%\begin{singlespacing}
+%\begin{flushleft}
+\title{\bigskip \bigskip \textbf  {$title$$if(subtitle)$\\{\large $subtitle$}$endif$}}
+
+\author {\myauthor \\ \emph{\myaffiliation} \\ \myemail  \date{\today}}
+%\end {flushleft}
+%\end{singlespacing}
+
+$if(title)$
+\maketitle
+$endif$
+
+%\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{4}
+\tableofcontents
+}
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents 
+
+$endif$
+
+
+$if(abstract)$
+\begin{abstract}
+\noindent $abstract$
+\end{abstract}
+$endif$
+
+
+$body$
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+%\newpage
+%\printbibliography
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

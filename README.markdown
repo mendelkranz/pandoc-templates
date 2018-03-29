@@ -14,15 +14,21 @@ What's included?
 - I preview markdown files using
   [Marked](http://marked2app.com/), a very handy live previewer
   for markdown files. The `css` files in the `marked/` folder are
-  meant to be used together with pandoc and
-  [Marked](http://markedapp.com/). You point Marked to use pandoc in Marked >
-  Preferences > Advanced. Then specify the file Path to Pandoc. With the new mactex version for 2015 my file path looks like this `/usr/local/bin/pandoc`You can add the various switches and arguments to pandoc
-  in the 'Args' field below it, mine look like this:
+  meant to be used together with pandoc and [Marked](http://markedapp.com/). The shell script in the `marked/`
+  folder, `panmarked.sh` is what I previously had Marked use as a
+  custom processor to create its HTML. You point to it in Marked >
+  Preferences > Behavior. In the current version of the application,
+  Marked 2, this is not needed anymore. You still tell Marked to use
+  pandoc as its custom processor. Go to Marked > Preferences >
+  Behavior. Then specify the file Path to Pandoc like this (e.g.):
+  `/usr/bin/pandoc` and the various switches and arguments to pandoc
+  in the 'Args' field below it, like this (but all on one line):
 
     ```
-    -r markdown -w html -s -S --filter pandoc-citeproc
-    --bibliography=/Users/Mendel/github/papers/main.bib
-    --csl=/Users/Mendel/.pandoc/csl/chicago-fullnote-bibliography.csl
+    -r markdown+simple_tables+table_captions+yaml_metadata_block -w html
+    -s -S --template=/Users/kjhealy/.pandoc/templates/html.template
+    --filter pandoc-crossref --filter pandoc-citeproc --filter pandoc-citeproc-preamble 
+    --bibliography=/Users/kjhealy/Documents/bibs/socbib-pandoc.bib
     ```
 
     Then check the box telling Marked to use this by default. Note
@@ -41,4 +47,5 @@ What's included?
   paper. It looks for `.md` files in the working directory and
   converts them to nice HTML, PDF, and DOCX. You can of course
   change the bibliography and template files as desired.
-- The `pandoc` commands produced by the current version of the `Makefile` include switches that invoke a [pandoc filters](http://pandoc.org/scripting.html) that does additional processing on the bibliography and cross-references in the document. You should install [pandoc-citeproc-preamble](https://github.com/spwhitton/pandoc-citeproc-preamble) to make it work.
+- The `pandoc` commands produced by the current version of the `Makefile` include switches that invoke two [pandoc filters](http://pandoc.org/scripting.html) that do additional processing on the bibliography and cross-references in the document. You should install [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) and [pandoc-citeproc-preamble](https://github.com/spwhitton/pandoc-citeproc-preamble) to make these work.
+- The [md-article-starter](https://github.com/kjhealy/md-starter) repository is a basic project folder you can clone that gives you a template for an article written in Markdown and a `Makefile` to produce `.html`, `.tex` or `.pdf` output from it. For R users there is an [rmd-article-starter](https://github.com/kjhealy/rmd-starter) as well, which begins with an `.Rmd` file.

@@ -1,0 +1,251 @@
+%%  Article template for use with http://kjhealy.github.com/latex-custom-kjh
+%%% This template presumes you are using xelatex, not pdflatex
+
+
+%% The template requires the memoir class
+\documentclass[12pt,article,oneside]{memoir} 
+
+%% Script-based version control tag (requires vc package)
+% \input{vc} % comment this out if you don't use the vc package
+
+%% Required packages
+\usepackage{graphicx,url}
+\usepackage{rotating}
+\usepackage{memoir-article-styles} %% in latex-custom-kjh/needs-memoir
+
+%% Choose font system
+\usepackage{fontspec} % comment out if not using xelatex
+\usepackage{xunicode} % comment out if not using xelatex
+
+
+
+%% For spacing purposes 
+\usepackage{setspace}
+%\doublespacing
+
+%footnote color
+\renewcommand\thefootnote{\textcolor{black}{\arabic{footnote}}}
+
+%flush footnotes left
+\usepackage[hang,flushmargin]{footmisc}
+
+%%This section until biblatex was added from the default
+
+
+$if(listings)$
+\usepackage{listings}
+$endif$
+
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes
+$endif$
+
+
+$if(tables)$
+\usepackage{longtable,booktabs}
+$endif$
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+ \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+ $endif$
+
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+ avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+
+$if(numbersections)$
+\setcounter{secnumdepth}{0}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+
+%% Biblatex: You should be using biblatex + biber instead of e.g. natbib + bibtex
+%% Comment these lines out and replace them with your own bibliographic setup if not.
+%% Chicago support packages come with texlive 2011; biber needs to be
+%% installed separately. Get it from
+%% http://biblatex-biber.sourceforge.net/
+\usepackage[american]{babel}
+\usepackage[babel,autostyle]{csquotes}
+\usepackage[style=chicago-authordate,abbreviate=true,backend=biber]{biblatex}
+
+%% Your bibliography file or files go here. Biblatex allows for
+%% multiple \addbibresource{} statements. If using bibtex you must use
+%% the older \bibliography{} declaration instead
+%\addbibresource{socbib.bib}    % http://kjhealy.github.com/socbibs/
+
+%% Some formatting tweaks to biblatex-chicago. Comment out if not
+%% using this biblatex style.
+
+%% Enclose article titles in quotes (this puts article titles in Title Case as well)
+\DeclareFieldFormat[article]{title}{\mkbibquote{#1}}
+
+%% Ensure book titles are in Title Case Like This, not Sentence case like this.
+\DeclareFieldFormat[book]{title}{%
+  \mkbibemph{#1}\isdot} % for books
+\DeclareFieldFormat{booktitle}{\mkbibemph{#1}} % for edited volumes
+
+
+
+
+%% Name, Title, Affiliation, Contact. Change as needed.
+\def\myaffiliation{University of Chicago}
+\def\myauthor{Mendel Kranz}
+\def\myemail{\small{\texttt{\href{mailto:mkranz@uchicago.edu}{mkranz@uchicago.edu}}}}
+%%\def\mytitle{title-meta}
+%%\def\mykeywords{Kieran, Healy, Kieran Healy, Sociology}
+
+
+%% Hyperlinks
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[xetex,
+	colorlinks=true,
+	urlcolor=BlueViolet, % external links
+        citecolor=Black, % citations
+        filecolor=BlueViolet, % local files
+	plainpages=false,
+  	pdfpagelabels,
+  	bookmarksnumbered,
+  	pdftitle={$title-meta$},
+  	pdfauthor={\myauthor},
+  	pdfkeywords={$keywords$}
+  	]{hyperref}
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\begin{document}
+
+%%% xelatex font choices
+%% You will need to buy these fonts or change the names to fonts you
+%% own, or comment out altogether if using pdflatex instead of
+%% xelatex.
+\setromanfont[Mapping=tex-text,Numbers=OldStyle]{Minion Pro}
+\setsansfont[Mapping=tex-text]{Minion Pro}
+\setmonofont[Mapping=tex-text,Scale=0.8]{Pragmata}
+
+% Make figures as wide as the margins
+\setkeys{Gin}{width=1\textwidth}
+
+%% Layout and styling: this style is defined in defined in
+%% latex-custom-kjh/needs-memoir/, along with several alternatives.
+\chapterstyle{article-4}
+
+\pagestyle{kjh}
+
+$if(title)$
+\title{\bigskip \bigskip {$title$$if(subtitle)$\\{\large $subtitle$}$endif$}}
+$endif$
+
+\author{\myauthor \\
+  \emph{\myaffiliation} \\ \myemail}% \thanks{I am grateful to }
+
+\date{\footnotesize\today}
+%\date{{\scriptsize{\texttt{\href{mailto:kjhealy@soc.duke.edu}{kjhealy@soc.duke.edu}}}}} 
+
+\published{\footnotesize Incomplete Draft. Please do not cite without permission.}
+
+
+%\published{Incomplete Draft. Please do not cite without permission.}
+
+
+
+$if(title)$
+\maketitle
+$endif$
+
+
+$if(abstract)$
+\begin{abstract}
+\noindent $abstract$
+\end{abstract}
+$endif$
+
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+
+$if(toc)$
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{4}
+\tableofcontents
+}
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents
+$endif$
+
+
+
+
+
+
+% Include version information in footer.
+%%\thispagestyle{kjhgit}
+
+
+
+% \epigraphfontsize{\footnotesize}
+% \setlength{\epigraphwidth}{4in}
+% \setlength{\epigraphrule}{0pt}
+% \setlength{\beforeepigraphskip}{0pt}
+% \setlength{\afterepigraphskip}{0pt}
+%
+% \epigraph{}{}
+
+%%\section{Introduction}
+
+$body$
+
+%% Bibliography. If you are not using biblatex, comment out this line.
+%\newpage
+%\printbibliography
+
+%\section{References}
+%\setlength{\parindent}{-0.2in}
+%\setlength{\leftskip}{0.2in}
+%\setlength{\parskip}{8pt}
+%\vspace*{-0.2in}
+%\noindent
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
