@@ -34,15 +34,12 @@ CSL = chicago-fullnote-bibliography
 PDFS=$(SRC:.md=.pdf)
 DOCX=$(SRC:.md=.docx)
 HTML=$(SRC:.md=.html)
-TEX=$(SRC:.md=.tex)
-DOCX=$(SRC:.md=.docx)
 
 
-all:	$(PDFS) $(HTML) $(TEX) $(DOCX)
+all:	$(PDFS) $(HTML) $(DOCX)
 
 pdf:	clean $(PDFS)
 html:	clean $(HTML)
-tex:	clean $(TEX)
 docx:	clean $(DOCX)
 
 %.html:	%.md
@@ -57,9 +54,5 @@ docx:	clean $(DOCX)
 %.pdf:	%.md
 	pandoc --pdf-engine=xelatex --template=$(PREFIX)/templates/article.tex --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
-
-%.docx: %.md
-	pandoc -r markdown+simple_tables+table_captions+yaml_metadata_block -w docx -S  --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
-
 clean:
-	rm -f *.html *.pdf *.tex *.docx
+	rm -f *.html *.pdf *.docx
