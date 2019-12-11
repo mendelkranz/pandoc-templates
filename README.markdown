@@ -4,11 +4,18 @@
 
 A collection of support files for use with Pandoc, and specifically for helping to turn pandoc markdown files into nice HTML, LaTeX, and PDF output. These files go in your `~/.pandoc/` folder. Some files are designed to work with the style and configuration material provided in [latex-custom-kjh](http://kjhealy.github.com/latex-custom-kjh/).
 
+
+PDF                        |HTML                       | Word
+:-------------------------:|:-------------------------:|:-------------------------:
+![](examples/screenshots/pdf_output.png)  |  ![](examples/screenshots/html_output.png )  |  ![](examples/screenshots/docx_output.png)
+
+
 ## Notes
 
 What's included?
 
 - A fork of the default [pandoc](http://johnmacfarlane.net/pandoc/) templates. These go in
+  article in PDF (vita LaTeX), HTML, or Microsoft Word. These go in
 `~/.pandoc/templates`. These can be be pointed to directly with the
 `--template=` switch as appropriate.
 - I preview markdown files using

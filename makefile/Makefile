@@ -15,6 +15,10 @@
 ## 	in your working directory. Make sure you do not have files in these
 ##	formats that you want to keep!
 
+
+## All Rmarkdown files in the working directory
+RSRC = $(wildcard *.Rmd)
+
 ## Markdown extension (e.g. md, markdown, mdown).
 MEXT = md
 
@@ -30,25 +34,37 @@ BIB = /Users/Mendel/github/papers/main.bib
 ## CSL stylesheet (located in the csl folder of the PREFIX directory).
 CSL = chicago-fullnote-bibliography
 
+## Pandoc options to use for all document types
+OPTIONS = markdown+simple_tables+table_captions+yaml_metadata_block+smart
+
+## MS Word template
+DOCXTEMPLATE = /Users/kjhealy/.pandoc/templates/rmd-minion-reference.docx
+
+MD=$(RSRC:.Rmd=.md)
 
 PDFS=$(SRC:.md=.pdf)
 DOCX=$(SRC:.md=.docx)
 HTML=$(SRC:.md=.html)
 
+all:	$(MD) $(PDFS) $(HTML) $(TEX) $(DOCX)
 
-all:	$(PDFS) $(HTML) $(DOCX)
-
+md:	clean $(MD)
 pdf:	clean $(PDFS)
 html:	clean $(HTML)
 docx:	clean $(DOCX)
 
 %.html:	%.md
-	pandoc  -w html --template=$(PREFIX)/templates/default.html --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
+	pandoc -w html  --template=$(PREFIX)/templates/html.template --css=$(PREFIX)/marked/kultiad-serif.css --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
 
 %.docx:	%.md
 	pandoc -w docx --reference-doc=$(PREFIX)/templates/reference.docx  --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
+%.docx: %.md
+	pandoc -r $(OPTIONS) -w docx  --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) --reference-doc=$(DOCXTEMPLATE) -o $@ $<
+
+%.pdf:	%.md
+	pandoc -r $(OPTIONS) -s --pdf-engine=pdflatex --template=$(PREFIX)/templates/latex.template --filter pandoc-citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) -o $@ $<
 
 
 %.pdf:	%.md
